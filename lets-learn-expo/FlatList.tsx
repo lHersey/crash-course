@@ -1,10 +1,34 @@
+/*
+ * LISTAS EN REACT NATIVE
+ * --------------------
+ * FlatList es un componente optimizado para listas largas:
+ * 1. Renderizado perezoso (lazy)
+ * 2. Reciclaje de vistas
+ * 3. Configuración de paginación
+ * 4. Pull-to-refresh incorporado
+ */
+
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, FlatList, View } from "react-native";
 import { List } from "react-native-paper";
-import { SafeAreaProvider, useSafeAreaInsets } from "react-native-safe-area-context";
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
 
-//ScrollView (Renderiza todos los elementos de una sola vez, es más directo, no tiene optimizaciones)
-//FlatList (Lazy Loading, más personalizable, soporte para header y footer, mejor rendimiento)
+/*
+ * FLATLIST VS SCROLLVIEW
+ * -------------------
+ * FlatList:
+ * - Mejor rendimiento para listas largas
+ * - Renderiza elementos según necesidad
+ * - Más configurable
+ *
+ * ScrollView:
+ * - Mejor para contenido pequeño
+ * - Renderiza todo de una vez
+ * - Más simple de usar
+ */
 
 const data = Array.from({ length: 30 }, (_, i) => `Item ${i + 1}`);
 
@@ -28,8 +52,10 @@ function App() {
         onEndReached={() => console.log("End reached")}
         onEndReachedThreshold={0.5}
         data={data}
-        keyExtractor={text => text}
-        renderItem={item => <List.Item title={item.item} description={"soy descripción"} />}
+        keyExtractor={(text) => text}
+        renderItem={(item) => (
+          <List.Item title={item.item} description={"soy descripción"} />
+        )}
       />
     </View>
   );
